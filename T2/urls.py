@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeDoneView, PasswordChangeView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeDoneView, PasswordChangeView, PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetView
 from django.urls.base import reverse_lazy
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.models import User
 from mainapp import views
 
 urlpatterns = [
@@ -31,6 +33,16 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('sec-home'),), name='sec-logout'),
     path('accounts/password_change/', PasswordChangeView.as_view(template_name='mainapp/registro/trocaSenha.html', success_url=reverse_lazy('sec-password_change_done'),), name='sec-password_change'),
     path('accounts/password_change_done/', PasswordChangeDoneView.as_view(template_name='mainapp/registro/trocaFeita.html',), name='sec-password_change_done'),
+    path('accounts/terminaRegistro/<int:pk>/', UpdateView.as_view( template_name='mainapp/registro/paginaUsuario.html', success_url=reverse_lazy('sec-home'), model=User, fields=['first_name', 'last_name', 'email',],), name='sec-completaDadosUsuario'),
+    path('accounts/password_reset/', PasswordResetView.as_view(template_name='mainapp/registro/formRecuperacao.html', success_url=reverse_lazy('sec-password_reset_done'), email_template_name='mainapp/registro/paginaRecuperacao.html', subject_template_name='mainapp/registro/password_change_text.txt', from_email='webmaster@meslin.com.br',), name='password_reset'),
+    path('accounts/password_reset_done/', PasswordResetDoneView.as_view( template_name='mainapp/registro/recuperacaoFeita.html',), name='sec-password_reset_done'),
+    path('accounts/password_reset_confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='mainapp/registro/confSenha.html', success_url=reverse_lazy('sec-password_reset_complete'),), name='password_reset_confirm'),
+    path('accounts/password_reset_complete/', PasswordResetCompleteView.as_view(template_name='mainapp/registro/sucessoSenha.html'), name='sec-password_reset_complete'),
+    path('accounts/profile/mylist/', views.minhaLista,name='sec-minhaLista'),
+    path('accounts/profile/updated/', views.alteraCand,name='sec-alteraCand'),
+    path('accounts/profile/update/', views.uplistaView,name='sec-atualiza'),
+    
+    
 
     path('accounts/', include('django.contrib.auth.urls')),
     

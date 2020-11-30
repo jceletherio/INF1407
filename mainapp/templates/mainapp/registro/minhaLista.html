@@ -1,0 +1,16 @@
+{% extends 'mainapp/registro/base.html' %}
+{% block title %}Meus Candidatos{% endblock %}
+{% block content %}
+<h2>Meus Candidatos:</h2>
+<p>
+<table>
+{%if not ls%}
+Ainda não tem Candidato
+{%else%}
+<tr>
+ <td>{{ ls.partido }}</td><td>{{ ls.sigla }}</td><td>{{ ls.nome }}</td><td><a href="{{ls.plano}}">Plano de Governo</a></td>
+ </tr>
+{%endif%}
+</table>
+</p>
+{% endblock%}

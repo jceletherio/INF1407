@@ -1,0 +1,17 @@
+{% extends 'mainapp/registro/base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Altera meus candidatos</title>
+</head>
+<body>
+ <h1>Altere dados dos seus candidatos</h1>
+ <form action="" method="POST">
+ {% csrf_token %}
+ <table class='formulario'>
+ {{ formulario.as_table}}
+ </table>
+ <button type="submit">Atualiza meus candidatos</button>
+ </form>
+</body>
+</html>
