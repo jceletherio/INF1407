@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeDoneView, PasswordChangeView, PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetView
 from django.urls.base import reverse_lazy
+from django.views.generic.base import RedirectView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.models import User
 from mainapp import views
@@ -45,7 +46,7 @@ urlpatterns = [
     path('accounts/profile/excluido/', views.deletaS,name='sec-deletaSucesso'),
     
     
-
+     path('favicon.ico',RedirectView.as_view(url='/static/img/favicon.ico')),
     path('accounts/', include('django.contrib.auth.urls')),
     
 ]
