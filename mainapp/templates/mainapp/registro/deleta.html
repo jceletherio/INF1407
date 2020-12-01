@@ -1,0 +1,6 @@
+{% extends 'mainapp/registro/base.html' %}
+{% block title %}Confirma exclusão{% endblock %}
+{% block content %}
+<h2>Deletar perfil</h2>
+Ao deletar seu perfil sua lista de candidatos será excluida. Deseja continuar?  <a href="{% url 'sec-deletaSucesso' %}">Sim</a>|<a href="{% url 'sec-minhaLista' %}">Não</a>
+{%endblock%}

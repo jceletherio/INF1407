@@ -29,7 +29,7 @@ urlpatterns = [
     path('accounts/', views.homeSec, name='sec-home'),
     path('accounts/registro/', views.registro, name='sec-registro'),
     path('accounts/login/', LoginView.as_view(template_name='mainapp/registro/login.html',), name='sec-login'),
-    path('accounts/profile/', views.paginaSecreta,name='sec-paginaSecreta'),
+    path('accounts/profile/', views.paginaCandidatos,name='sec-paginaCandidatos'),
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('sec-home'),), name='sec-logout'),
     path('accounts/password_change/', PasswordChangeView.as_view(template_name='mainapp/registro/trocaSenha.html', success_url=reverse_lazy('sec-password_change_done'),), name='sec-password_change'),
     path('accounts/password_change_done/', PasswordChangeDoneView.as_view(template_name='mainapp/registro/trocaFeita.html',), name='sec-password_change_done'),
@@ -40,7 +40,9 @@ urlpatterns = [
     path('accounts/password_reset_complete/', PasswordResetCompleteView.as_view(template_name='mainapp/registro/sucessoSenha.html'), name='sec-password_reset_complete'),
     path('accounts/profile/mylist/', views.minhaLista,name='sec-minhaLista'),
     path('accounts/profile/updated/', views.alteraCand,name='sec-alteraCand'),
-    path('accounts/profile/update/', views.uplistaView,name='sec-atualiza'),
+    path('accounts/profile/update/', views.attCand,name='sec-atualiza'),
+    path('accounts/profile/deleta/', views.deleta,name='sec-deleta'),
+    path('accounts/profile/excluido/', views.deletaS,name='sec-deletaSucesso'),
     
     
 

@@ -8,21 +8,22 @@ from .models import Mylist, Estado, Municipio, Prefeito
 from django.views.generic.base import View
 from .forms import mylistForm
 from django.urls.base import reverse_lazy
+from django.contrib.auth import get_user_model
 
 
 # Create your views here.
-
-class uplistaView(View):
-    def get(self, request, *args, **kwargs):
-        context = { 'formulario': mylistForm, }
-        return render(request,"mainapp/registro/upLista.html", context)
-
-    def post(self, request, *args, **kwargs):
-        formulario = mylistForm(request.POST)
-        if formulario.is_valid():
+def attCand(request):
+    if request.method == "POST":
+        form = mylistForm(request.POST)
+        if form.is_valid():
             current_user = request.user.username
-            ml = Mylist.objects.get(nome=current_user).update(formulario.myprefeito)
+            ml = Mylist.objects.get(nome=current_user)
+            ml.myprefeito = form.cleaned_data['myprefeito']
+            ml.save()
             return HttpResponseRedirect(reverse_lazy("sec-alteraCand"))
+    else:
+        form = mylistForm()
+    return render(request, 'mainapp/registro/upLista.html', {'form': form})
 
 def home(request):
     return render(request, 'mainapp/home.html')
@@ -48,13 +49,13 @@ def registro(request):
 def login(request):
     return render(request, 'mainapp/registro/login.html')
 
-def paginaSecreta(request):
+def paginaCandidatos(request):
     current_user = request.user.username
     ml = Mylist.objects.filter(nome=current_user)
     if not ml:
         Mylist.objects.create(nome=current_user, myprefeito=0)
     ls = Estado.objects.get(id=1).municipio_set.get(id=1)
-    return render(request, 'mainapp/registro/paginaSecreta.html', {"ls": ls})
+    return render(request, 'mainapp/registro/paginaCandidatos.html', {"ls": ls})
 
 def trocaSenha(request):
     return render(request, 'mainapp/registro/trocaSenha.html')
@@ -69,12 +70,21 @@ def minhaLista(request):
     current_user = request.user.username
     ml = Mylist.objects.get(nome=current_user).myprefeito
     ls = Estado.objects.get(id=1).municipio_set.get(id=1).prefeito_set.filter(sigla = ml)
+    if not ls:
+        pass
+    else:
+        ls = Estado.objects.get(id=1).municipio_set.get(id=1).prefeito_set.get(sigla = ml)
     return render(request, 'mainapp/registro/minhaLista.html', {"ls": ls})
 
-def alteraCand(request):
-    current_user = request.user.username
-    ml = Mylist.objects.get(nome=current_user).update(myprefeito = 25)
-    
+def alteraCand(request):    
     return render(request, 'mainapp/registro/alteraCand.html')
 
+def deleta(request):
+    return render(request, 'mainapp/registro/deleta.html')
 
+def deletaS(request):
+    current_user = request.user.username
+    Mylist.objects.get(nome=current_user).delete()
+    User = get_user_model()
+    User.objects.get(username = current_user).delete()
+    return render(request, 'mainapp/registro/excluido.html')

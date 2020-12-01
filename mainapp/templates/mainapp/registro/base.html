@@ -7,19 +7,19 @@
 <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
 </head>
 <body>
-<h1>Site Seguro</h1>
 <div>
 <a href="/">Homepage</a>
-| <a href="{% url 'sec-paginaSecreta' %}">Cadidatos</a>
+| <a href="{% url 'sec-paginaCandidatos' %}">Cadidatos</a>
 | <a href="{% url 'sec-minhaLista' %}">Meus Cadidatos</a>
 | <a href="{% url 'sec-atualiza' %}">Atualiza Candidatos</a>
 {% if user.is_authenticated %}
 | <a href="{% url 'sec-logout' %}">Logout</a>
 | <a href="{% url 'sec-password_change' %}">Trocar senha</a>
 | <a href="{% url 'sec-completaDadosUsuario' pk=user.id %}">Terminar registro</a>
+| <a href="{% url 'sec-deleta' %}">Deletar minha conta</a>
 {% else %}
 | <a href="{% url 'sec-registro' %}">Registrar</a>
-| <a href="{% url 'sec-login' %}?next={% url 'sec-paginaSecreta' %}">
+| <a href="{% url 'sec-login' %}?next={% url 'sec-paginaCandidatos' %}">
 Login
 </a>
 {% endif %}
