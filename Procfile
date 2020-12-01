@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn inf1407-josecarlos.wsgi --log-file - 
+web: gunicorn T2.wsgi --log-file - 
