@@ -6,7 +6,7 @@
 <table>
  {% for Prefeito in ls.prefeito_set.all %}
  <tr>
- <td>{{ Prefeito.partido }}</td><td>{{ Prefeito.sigla }}</td><td>{{ Prefeito.nome }}</td><td><a href="{{Prefeito.plano}}">Plano de Governo</a></td>
+ <td><img src="{{Prefeito.sigla}}" width="161" height="225"></td><td>{{ Prefeito.partido }}</td><td>{{ Prefeito.sigla }}</td><td>{{ Prefeito.nome }}</td><td><a href="{{Prefeito.plano}}">Plano de Governo</a></td>
  </tr>
  </tr>
  {% endfor%} 

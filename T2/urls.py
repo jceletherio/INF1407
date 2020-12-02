@@ -46,7 +46,15 @@ urlpatterns = [
     path('accounts/profile/excluido/', views.deletaS,name='sec-deletaSucesso'),
     
     
-     path('favicon.ico',RedirectView.as_view(url='/static/img/favicon.ico')),
+    path('favicon.ico',RedirectView.as_view(url='/static/img/favicon.ico')),
+    path('accounts/profile/10',RedirectView.as_view(url='/static/img/10.jpg')),
+    path('accounts/profile/12',RedirectView.as_view(url='/static/img/12.jpg')),
+    path('accounts/profile/13',RedirectView.as_view(url='/static/img/13.jpeg')),
+    path('accounts/profile/25',RedirectView.as_view(url='/static/img/25.jfif')),
+    path('accounts/profile/mylist/10',RedirectView.as_view(url='/static/img/10.jpg')),
+    path('accounts/profile/mylist/12',RedirectView.as_view(url='/static/img/12.jpg')),
+    path('accounts/profile/mylist/13',RedirectView.as_view(url='/static/img/13.jpeg')),
+    path('accounts/profile/mylist/25',RedirectView.as_view(url='/static/img/25.jfif')),
     path('accounts/', include('django.contrib.auth.urls')),
     
 ]
