@@ -1,5 +1,5 @@
 # INF1407
-Trabalho da disciplina INF1407
+Trabalho da disciplina INF1407 usando Django
 
 No trabalho implementei uma plataforma para ter acesso aos candidatos as eleições, com foto, nome, numero, partido e plano de governo.
 
